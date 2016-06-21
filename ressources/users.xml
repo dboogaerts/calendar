@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <user>
+        <id>1</id>
+        <nom>Denis</nom>
+        <login>Dragon Rouge</login>
+        <mdp>titi</mdp>
+        <ip>139.168.77.12</ip>
+        <role>propriétaire</role>
+        <email>dboogaerts@ulg.ac.be</email>
+    </user>
+</root>
