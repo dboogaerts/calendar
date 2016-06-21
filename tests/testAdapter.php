@@ -30,8 +30,23 @@
     
     $u3= $uxa->getUser("Dragon Rouge", "titi");
     if($u3 !==FALSE){
-        echo "OK";
+        echo "OK\n";
         var_dump($u3);
+    }else{
+        echo "Echec";
+    }
+    
+    
+    
+    //Avec Factory
+    echo "---------------------------\n"
+    . "Test 4 :en passant par factory Bon login ou mdp\n";
+    require_once '../M/Factories/AbstractUserAdapterFactory.php';
+    $adapter = AbstractUserAdapterFactory::getFactory(1)->getAdapter();
+    $u4 = $adapter->getUser("Dragon Rouge", "titi");
+    if($u4 !==FALSE){
+        echo "OK\n";
+        var_dump($u4);
     }else{
         echo "Echec";
     }

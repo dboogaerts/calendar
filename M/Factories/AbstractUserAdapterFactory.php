@@ -5,6 +5,7 @@
  * @author denis
  */
 require_once __DIR__.'/XMLUserAdapterFactory.php';
+require_once __DIR__.'/DBUserAdapterFactory.php';
 abstract class AbstractUserAdapterFactory {
      const XML=1;
      const DB = 2;
@@ -14,7 +15,7 @@ abstract class AbstractUserAdapterFactory {
                  return new XMLUserAdapterFactory();
                  break;
              case self::DB:
-                 return;
+                 return new DBUserAdapterFactory();
                  break;
 
              default:
@@ -24,4 +25,4 @@ abstract class AbstractUserAdapterFactory {
     abstract public function getAdapter();
 }
 
-var_dump(AbstractUserAdapterFactory::getFactory(1)->getAdapter()->getUser("Dragon Rouge","titi"));
+

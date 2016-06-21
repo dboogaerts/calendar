@@ -6,7 +6,7 @@
  * @author denis
  */
 require_once __DIR__.'/./AbstractUserAdapterFactory.php';
-require_once '../Adapter/UserXMLAdapter.php';
+require_once __DIR__.'/../Adapter/UserXMLAdapter.php';
 class XMLUserAdapterFactory extends AbstractUserAdapterFactory{
     private $xmlAdapter=null;
     public function getAdapter() {
