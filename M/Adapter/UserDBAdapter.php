@@ -27,7 +27,8 @@ class UserDBAdapter implements IUserAdaptable{
         $stmt = $this->pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS,"\M\Metier\User");
         $stmt->execute(["login"=>$login, "mdp"=>$mdp]);
-        return $stmt->fetch();
+        $u = $stmt->fetch();
+        return ($u!==null)?$u:false;
                 
     }
 
