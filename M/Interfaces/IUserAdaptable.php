@@ -1,4 +1,5 @@
 <?php
+namespace M\Interfaces;
 interface IUserAdaptable {
     /**
      * @param string $login Login de l'utilisateur

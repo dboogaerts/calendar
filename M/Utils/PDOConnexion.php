@@ -1,11 +1,6 @@
 <?php
-
-/**
- * Description of MyPDO
- *
- * @author denis
- */
-
+namespace M\Utils;
+use PDO;
 class PDOConnexion {
     
     private static $mpdo;

@@ -1,16 +1,12 @@
 <?php
-
-
-/**
- * Description of UserXMLAdapter
- *
- * @author denis
- */
+namespace M\Adapter;
 
 require_once __DIR__.'/../Interfaces/IUserAdaptable.php';
 require_once __DIR__.'/../Utils/PDOConnexion.php';
 require_once __DIR__.'/../Metier/User.php';
-
+use DOMDocument;
+use M\Interfaces\IUserAdaptable;
+use M\Metier\User;
 
 class UserXMLAdapter implements IUserAdaptable{
     private $doc;
@@ -26,7 +22,6 @@ class UserXMLAdapter implements IUserAdaptable{
         $retour = false;
         $i=0;
         while ($i<$users->length && !$retour){
-//            var_dump($users->item($i)->getElementsByTagName("login")->item(0)->textContent);
             $l = $users->item($i)->getElementsByTagName("login")->item(0)->textContent;
             $m = $users->item($i)->getElementsByTagName("mdp")->item(0)->textContent;
             

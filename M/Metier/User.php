@@ -1,9 +1,5 @@
 <?php
-/**
- * Description of User
- *
- * @author denis
- */
+namespace M\Metier;
 class User {
     /**
      *

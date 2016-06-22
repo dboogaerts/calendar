@@ -1,19 +1,14 @@
 <?php
+namespace M\Factories;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of DBUserAdapter
- *
- * @author denis
- */
 require_once __DIR__.'/./AbstractUserAdapterFactory.php';
 require_once __DIR__.'/../Adapter/UserDBAdapter.php';
 require_once __DIR__.'/../Utils/PDOConnexion.php';
+
+use M\Adapter\UserDBAdapter;
+use M\Factories\AbstractUserAdapterFactory;
+use M\Utils\PDOConnexion;
+
 class DBUserAdapterFactory extends AbstractUserAdapterFactory{
     private $DBAdapter=null;
     public function getAdapter() {

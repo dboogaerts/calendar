@@ -1,9 +1,6 @@
 <?php
-/**
- * Description of AbstractUserAdapterFactory
- *
- * @author denis
- */
+namespace M\Factories;
+
 require_once __DIR__.'/XMLUserAdapterFactory.php';
 require_once __DIR__.'/DBUserAdapterFactory.php';
 abstract class AbstractUserAdapterFactory {

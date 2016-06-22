@@ -2,6 +2,12 @@
     header("Content-type:text/plain;charset=utf8");
     require_once '../M/Adapter/UserDBAdapter.php';
     require_once '../M/Utils/PDOConnexion.php';
+    
+    use M\Adapter\UserDBAdapter;
+    use M\Adapter\UserXMLAdapter;
+    use M\Factories\AbstractUserAdapterFactory;
+    use M\Utils\PDOConnexion;
+    
     $udb= new UserDBAdapter(PDOConnexion::getInstance());
     $u  = $udb->getUser("dragon rouge", "titi");
     if($u !==FALSE){
