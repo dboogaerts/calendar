@@ -1,7 +1,7 @@
 <?php
 namespace M\Utils;
 
-class SessionManager {
+class SessionManager{
     public function __construct() {
         if(!isset($_SESSION)){
             session_start();
