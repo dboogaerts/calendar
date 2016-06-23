@@ -4,9 +4,12 @@ namespace M\Adapter;
 require_once __DIR__.'/../Interfaces/IUserAdaptable.php';
 require_once (__DIR__.'/../Utils/PDOConnexion.php');
 require_once __DIR__.'/../Metier/User.php';
+require_once __DIR__."/../Exceptions/UserNotFoundException.php";
+
 
 use \PDO;
 use M\Interfaces\IUserAdaptable;
+use M\Exceptions\UserNotFoundException;
 
 class UserDBAdapter implements IUserAdaptable{
     private $pdo;
@@ -28,7 +31,10 @@ class UserDBAdapter implements IUserAdaptable{
         $stmt->setFetchMode(PDO::FETCH_CLASS,"\M\Metier\User");
         $stmt->execute(["login"=>$login, "mdp"=>$mdp]);
         $u = $stmt->fetch();
-        return ($u!==null)?$u:false;
+        if($u == null){
+            throw new UserNotFoundException("Mauvais login/mot de passe");
+        }
+        return $u;
                 
     }
 

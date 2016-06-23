@@ -2,9 +2,12 @@
 namespace C;
 require_once __DIR__.'/../M/Utils/SessionManager.php';
 require_once __DIR__.'/../M/Factories/AbstractUserAdapterFactory.php';
+require_once __DIR__.'/../M/Exceptions/UserNotFoundException.php';
 
 use M\Utils\SessionManager;
 use M\Factories\AbstractUserAdapterFactory;
+use M\Exceptions\UserNotFoundException;
+
 class UserController {
     /**
      *
@@ -22,7 +25,9 @@ class UserController {
     public static function getCurrentUser(){
         
         $user=self::$sm->getValeur("user");
-        
+        if($user==null){
+            throw new UserNotFoundException("Utilisateur non loggué",2);
+        }
         return $user;
     }
     /**
@@ -32,16 +37,17 @@ class UserController {
      */
     public function login($login,$mdp) {
         $retour=false;
-        $u = self::getCurrentUser("user");
-        if($u!=null){
+        try{
+            $u =  self::getCurrentUser("user");
             $this->logout();
-        }
+        }catch(UserNotFoundException $unfe){}
+        
         $adapter = AbstractUserAdapterFactory::getFactory(2)->getAdapter();
-        $u = $adapter->getUser($login,$mdp);
-        if($u!==false){
+       
+            $u = $adapter->getUser($login,$mdp);
             self::$sm->setValeur("user",$u);
             $retour = true;
-        }
+        
         return $retour;   
     }
     

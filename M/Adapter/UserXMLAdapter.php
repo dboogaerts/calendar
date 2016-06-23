@@ -4,9 +4,12 @@ namespace M\Adapter;
 require_once __DIR__.'/../Interfaces/IUserAdaptable.php';
 require_once __DIR__.'/../Utils/PDOConnexion.php';
 require_once __DIR__.'/../Metier/User.php';
+require_once __DIR__."/../Exceptions/UserNotFoundException.php";
+
 use DOMDocument;
 use M\Interfaces\IUserAdaptable;
 use M\Metier\User;
+use M\Exceptions\UserNotFoundException;
 
 class UserXMLAdapter implements IUserAdaptable{
     private $doc;
@@ -37,6 +40,9 @@ class UserXMLAdapter implements IUserAdaptable{
                 ]);
             }
             $i++;
+        }
+        if($retour == false){
+            throw new UserNotFoundException("Mauvais login/mot de passe");
         }
         return $retour;
     }
