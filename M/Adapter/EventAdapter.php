@@ -175,7 +175,7 @@ class EventAdapter {
     }
 
     public function addEvents(Calendar $c, Event $e) {
-        $uid=uniq_id();
+        $uid=uniqid();
         $sql="INSERT INTO `calendar`.`events`
                 (`id`,
                 `date_from`,
@@ -184,7 +184,7 @@ class EventAdapter {
                 `calendar_fk`,
                 `fk_proprietaire`)
                 VALUES
-                (".uniq_id().", 
+                (:uid, 
                 :date_deb, 
                 :date_fin, 
                 :libelle,
@@ -193,6 +193,7 @@ class EventAdapter {
         $stmt = $this->pdo->prepare($sql);
         //var_dump($e);
         $stmt->execute([
+                    "uid" => $uid,
                     "date_deb" =>$e->getDateFrom()->format("Y-m-d H:i:s"), 
                     "date_fin" =>$e->getDateTo()->format("Y-m-d H:i:s"), 
                     "libelle"  =>$e->getLibelle(),
