@@ -1,6 +1,6 @@
 <?php
 namespace M\Metier;
-class User {
+class User implements \JsonSerializable{
     /**
      *
      * @var int 
@@ -86,6 +86,16 @@ class User {
          $this->ip= (isset($tab["ip"]))?$tab["ip"]:null;
          $this->role= (isset($tab["role"]))?$tab["role"]:null;
          $this->email= (isset($tab["email"]))?$tab["email"]:null;
+     }
+     public function jsonSerialize() {
+         return[
+             "id"   =>  $this->id,
+             "nom"  =>  $this->nom,
+             "login"=>  $this->login,
+             "ip"=>  $this->ip,
+             "role"=>  $this->role,
+             "email"=>  $this->email,  
+         ];
      }
 
 }

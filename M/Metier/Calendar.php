@@ -1,6 +1,6 @@
 <?php
 namespace M\Metier;
-class Calendar {
+class Calendar implements \JsonSerializable{
     private $id;
     private $nom;
     private $type;
@@ -71,6 +71,15 @@ class Calendar {
         $this->type = isset($params["type"])?$params["type"]:0;
         $this->proprietaire = isset($params["proprietaire"])?$params["proprietaire"]:0;
         $this->nom = isset($params["nom"])?$params["nom"]:0;
+    }
+    public function jsonSerialize() {
+        return [
+            "id"=>  $this->id,
+            "events"=> $this->events,
+            "type"=>  $this->type,
+            "proprietaire"=>  $this->proprietaire,
+            "nom"=> $this->nom
+           ];
     }
 
 }

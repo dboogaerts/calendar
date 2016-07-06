@@ -2,7 +2,7 @@
 namespace M\Metier;
 
 
-class Event {
+class Event implements \JsonSerializable {
     private $id;
     private $libelle;
     private $dateFrom;
@@ -87,4 +87,15 @@ class Event {
         $this->libelle= isset($param["libelle"])?$param["libelle"]:null;
         $this->proprietaire= isset($param["proprietaire"])?$param["proprietaire"]:null;
     }
+    public function jsonSerialize() {
+        return [
+            "id"=>$this->id,
+            "calendar"=>$this->calendar->getId(),
+            "dateFrom"=>$this->dateFrom->format("Y-m-d H:i:s"),
+            "dateTo"=>$this->dateTo->format("Y-m-d H:i:s"),
+            "libelle"=>$this->libelle,
+            "proprietaire"=>$this->proprietaire->getId()
+        ];
+    }
+
 }

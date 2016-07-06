@@ -55,6 +55,7 @@ class UserController {
         self::$sm->setValeur("user",null);
     }
     public function permit($action) {
+        //TODO : Ajouter la prise en compte du type de calendrier
         $u  = self::getCurrentUser();
         $retour = false;
         switch ($action) {
