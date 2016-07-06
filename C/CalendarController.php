@@ -16,15 +16,15 @@ use C\UserController;
 class CalendarController {
 
     const VIDE = 0;
-    const MONTH = 0;
-    const WEEK = 0;
-    const DAY = 0;
+    const MONTH = 1;
+    const WEEK = 2;
+    const DAY = 3;
 
     private $pdo;
     private $user;
     private $adapter;
 
-    public function __construct($param) {
+    public function __construct($param=null) {
         $this->pdo = \M\Utils\PDOConnexion::getInstance();
         $this->user = new UserController();
         $this->adapter = new \M\Adapter\EventAdapter($this->pdo);
@@ -108,7 +108,7 @@ class CalendarController {
             throw new \M\Exceptions\UserAuthorizationException("L'utilisateur n'a pas les droits de modification");
         }
         $e = $this->transformeEnEvent($event);
-        $this->adapter->updateEvent($e);
+        return $this->adapter->updateEvent($e);
     }
     /**
      * 
@@ -116,18 +116,22 @@ class CalendarController {
      * @return \M\Metier\Event
      */
     private function transformeEnEvent(\stdClass $event) {
+        $evt = json_decode(json_encode($event),true);
+        var_dump($evt);
         $e = new \M\Metier\Event();
-        $e->popule(array($event));
+        $e->popule($evt);
+         var_dump($e);
         $e->setDateFrom(new \DateTime($e->getDateFrom()));
         $e->setDateTo(new \DateTime($e->getDateTo()));
         //user
         $u = new \M\Metier\User();
-        $u->setId($event->user_id);
+        $u->setId($evt["proprietaire"]);
         $e->setProprietaire($u);
         //calendar
         $c=new \M\Metier\Calendar();
-        $c->setId($event->calendar_id);
+        $c->setId($evt["calendar"]);
         $e->setCalendar($c);
+       
         return $e;
     }
 

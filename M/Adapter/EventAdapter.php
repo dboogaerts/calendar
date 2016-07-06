@@ -214,21 +214,19 @@ class EventAdapter {
             UPDATE `calendar`.`events`
                 SET
                 
-                `date_from` = :date_rom,
+                `date_from` = :date_from,
                 `date_to` = :date_to,
-                `libelle` = :libelle:,
-                `calendar_fk` = :calendar_fk:,
-                `fk_proprietaire` = :fk_proprietaire:
+                `libelle` = :libelle
                 WHERE id=:id;
             ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
+        return $stmt->execute([
                     "date_from" =>$e->getDateFrom()->format("Y-m-d H:i:s"), 
                     "date_to" =>$e->getDateTo()->format("Y-m-d H:i:s"), 
                     "libelle"  =>$e->getLibelle(),
-                    "calendar_fk"=>$e->getCalendar()->getId(),
-                    "fk_proprietaire" =>$e->getUser()->getId()
+                    "id"=>$e->getId()
                 ]);
+        
     }
 
 }
