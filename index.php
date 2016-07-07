@@ -54,7 +54,6 @@ $app->post("/event/{id}", function ($requete,$response,$args) use ($cont){
 });
 
 
-
 $c = $app->getContainer();
 $c['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
